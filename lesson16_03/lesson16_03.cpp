@@ -38,7 +38,7 @@ public:
     virtual void print_info()
     {
         std::cout << get_name() << ":" << std::endl;
-        std::cout << (check() ? "Правильный" : "Неправильный") << std::endl;
+        std::cout << (check() ? "Правильная" : "Неправильная") << std::endl;
         std::cout << "Количество сторон: " << get_sides_count() << std::endl;
     }
 };
@@ -97,7 +97,7 @@ public:
     }
     bool check() override
     {
-        return ((sides_count == 3) && ((A + B + C) == 180)) ? true : false;
+        return (Triangle::check() && (C == 90)) ? true : false;
     }
 };
 
@@ -113,7 +113,7 @@ public:
     }
     bool check() override
     {
-        return ((a == c) && (A == C)) ? true : false;
+        return (Triangle::check() && (a == c) && (A == C)) ? true : false;
     }
 };
 
@@ -129,7 +129,7 @@ public:
     }
     bool check() override
     {
-        return ((a == b) && (b == c) && (A == B) && (B == C)) ? true : false;
+        return (Triangle::check() && (a == b) && (b == c) && (A == B) && (B == C)) ? true : false;
     }
 };
 
@@ -166,7 +166,7 @@ public:
     }
     bool check() override
     {
-        return ((sides_count == 4) && ((A + B + C) == 360)) ? true : false;
+        return ((sides_count == 4) && ((A + B + C + D) == 360)) ? true : false;
     }
     void print_info() override
     {
@@ -187,7 +187,7 @@ public:
     }
     bool check() override
     {
-        return ((a == c) && (b == d) && (A == C) && (B == D)) ? true : false;
+        return (Quadrangle::check() && (a == c) && (b == d) && (A == C) && (B == D)) ? true : false;
     }
 };
 
@@ -202,7 +202,7 @@ public:
     }
     bool check() override
     {
-        return ((a == c) && (b == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90)) ? true : false;
+        return (Quadrangle::check() && (a == c) && (b == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90)) ? true : false;
     }
 };
 
@@ -217,7 +217,7 @@ public:
     }
     bool check() override
     {
-        return ((a == b) && (b == c) && (c == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90)) ? true : false;
+        return (Quadrangle::check() && (a == b) && (b == c) && (c == d) && (A == 90) && (B == 90) && (C == 90) && (D == 90)) ? true : false;
     }
 };
 
@@ -228,11 +228,11 @@ public:
 
     std::string get_name() override
     {
-        return "Rhombus";
+        return "Ромб";
     }
     bool check() override
     {
-        return ((a == b) && (b == c) && (c == d) && (A == C) && (B == D)) ? true : false;
+        return (Quadrangle::check() && (a == b) && (b == c) && (c == d) && (A == C) && (B == D)) ? true : false;
     }
 };
 
@@ -245,13 +245,14 @@ int main()
 
     Triangle triangle = Triangle(10, 20, 30, 50, 60, 70);
     RightTriangle right_triangle = RightTriangle(10, 20, 30, 50, 60);
+    RightTriangle right_triangle_2 = RightTriangle(10, 20, 30, 50, 40);
     IsoscelesTriangle isosceles_triangle = IsoscelesTriangle(10, 20, 50, 60);
     EquilateralTriangle equilateral_triangle = EquilateralTriangle(30);
 
     Quadrangle quadrangle = Quadrangle(10, 20, 30, 40, 50, 60, 70, 80);
-    Parallelogram parallelogram = Parallelogram(20, 30, 30, 40);
     class Rectangle rectangle = class Rectangle(10, 20);
     Square square = Square(20);
+    Parallelogram parallelogram = Parallelogram(20, 30, 30, 40);
     Rhombus rhombus = Rhombus(30, 30, 40);
 
     figure.print_info();
@@ -260,17 +261,19 @@ int main()
     std::cout << std::endl;
     right_triangle.print_info();
     std::cout << std::endl;
+    right_triangle_2.print_info();
+    std::cout << std::endl;
     isosceles_triangle.print_info();
     std::cout << std::endl;
     equilateral_triangle.print_info();
     std::cout << std::endl;
     quadrangle.print_info();
     std::cout << std::endl;
-    parallelogram.print_info();
-    std::cout << std::endl;
     rectangle.print_info();
     std::cout << std::endl;
     square.print_info();
+    std::cout << std::endl;
+    parallelogram.print_info();
     std::cout << std::endl;
     rhombus.print_info();
     std::cout << std::endl;
